@@ -1,0 +1,37 @@
+* {
+  background-color: rgb(61, 77, 65);
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15em;
+}
+
+h1 {
+  text-align: center;
+  font-family: fish&chips;
+}
+
+#main-text {
+  font-family: times;
+  text-align: center;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 24px;
+}
+
+#inspiration {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul, li, h3 {
+  background-color: rgb(36, 0, 54);
+  color: white;
+}
