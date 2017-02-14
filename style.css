@@ -32,6 +32,10 @@ h1 {
 }
 
 ul, li, h3 {
-  background-color: rgb(36, 0, 54);
+  background-color: rgb(26, 42, 30);
   color: white;
+}
+
+table, tr, th, td {
+  border: 2px solid black;
 }

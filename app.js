@@ -3,7 +3,7 @@
 //An array for use when creating the sales projections per hour
 var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-function CookieStore(nameProper, minCustomers, maxCustomers, avgCookies){
+function CookieStore(name, minCustomers, maxCustomers, avgCookies){
   this.name = name;
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
@@ -29,6 +29,24 @@ var getCookiesPerHour = function(objectName){
   }
 };
 
+CookieStore.prototype.makeTheTable = function(tableToDrawInto){
+  var hourlySalesRowEl = document.createElement('tr');
+  console.log(hourlySalesRowEl);
+  var storeNameEl = document.createElement('th');
+  console.log(storeNameEl);
+  storeNameEl.textContent = this.name;
+  hourlySalesRowEl.appendChild(storeNameEl);
+
+  for(var hours = 0; hours < this.cookiesPerHour.length; hours++){
+    var hourlyCookieSales = document.createElement('td');
+    console.log(hourlyCookieSales);
+    hourlyCookieSales.textContent = this.cookiesPerHour[hours];
+    console.log(hourlyCookieSales);
+    hourlySalesRowEl.appendChild(hourlyCookieSales);
+  }
+  tableToDrawInto.appendChild(hourlySalesRowEl);
+};
+
 //Call a function for each city to populate the arrays in each object.
 getCookiesPerHour(firstAndPike);
 getCookiesPerHour(seatacAirport);
@@ -36,50 +54,23 @@ getCookiesPerHour(seattleCenter);
 getCookiesPerHour(capitolHill);
 getCookiesPerHour(alki);
 
-//Create function to create an ul and insert the array into it.
-// function putSalesProjections(location){
-//   console.log(location.name + '-projections');
-//   var ulElement = document.getElementById(location.name + '-projections');
-//
-//   for(var ii = 0; ii < 15; ii++){
-//     var liElement = document.createElement('li');
-//     liElement.setAttribute('class', 'avgCookiesPerHour');
-//     liElement.innerHTML = storeHours[ii] + ': ' + location.cookiesPerHour[ii] + ' cookies';
-//     ulElement.appendChild(liElement);
-//   }
-// }
-//
-// //call the functions to make the lists
-// putSalesProjections(firstAndPike);
-// putSalesProjections(seatacAirport);
-// putSalesProjections(seattleCenter);
-// putSalesProjections(capitolHill);
-// putSalesProjections(alki);
-
-var stores = [firstAndPike, seatacAirport, seattleCenter, capitolHill, alki];
 var tableEl = document.createElement('table');
+console.log(tableEl);
+var sectionEl = document.getElementById('cookieSalesTable');
+sectionEl.appendChild(tableEl);
 
-for(var ii = 0; ii < stores.length; ii++){
-  var currentStore = stores[ii];
-
-  var rowEl = document.createElement('tr');
-  tableEl.appendChild(rowEl);
-
-  var nameEl = document.createElement('th');
-  nameEl.textContent = currentStore.name;
-  rowEl.appendChild(nameEl);
-
-  var minCustEl = document.createElement('td');
-  minCustEl.textContent = currentStore.minCustomers;
-  rowEl.appendChild(minCustEl);
-
-  var maxCustEl = document.createElement('td');
-  maxCustEl.textContent = currentStore.maxCustomers;
-  rowEl.appendChild(maxCustEl);
-
-  var avgCookiesEl = document.createElement('td');
-  avgCookiesEl.textContent = currentStore.avgCookies;
-  rowEl.appendChild(avgCookiesEl);
+var hoursRowEl = document.createElement('tr');
+var hoursHeaderEl = document.createElement('th');
+hoursRowEl.appendChild(hoursHeaderEl);
+for(var tableHours = 0; tableHours < storeHours.length; tableHours++){
+  var hoursDataEl = document.createElement('td');
+  hoursDataEl.textContent = storeHours[tableHours];
+  hoursRowEl.appendChild(hoursDataEl);
 }
+tableEl.appendChild(hoursRowEl);
 
-document.body.appendChild(tableEl);
+firstAndPike.makeTheTable(tableEl);
+seatacAirport.makeTheTable(tableEl);
+seattleCenter.makeTheTable(tableEl);
+capitolHill.makeTheTable(tableEl);
+alki.makeTheTable(tableEl);
