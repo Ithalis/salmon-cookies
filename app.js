@@ -74,3 +74,24 @@ seatacAirport.makeTheTable(tableEl);
 seattleCenter.makeTheTable(tableEl);
 capitolHill.makeTheTable(tableEl);
 alki.makeTheTable(tableEl);
+
+var stores = [firstAndPike, seatacAirport, seattleCenter, capitolHill, alki];
+function makeTotalRow(){
+  var totalRowEl = document.createElement('tr');
+  tableEl.appendChild(totalRowEl);
+  var totalHeaderEl = document.createElement('th');
+  totalHeaderEl.textContent = 'Totals';
+  totalRowEl.appendChild(totalHeaderEl);
+  var totalCookies = 0;
+  for(var i = 0; i < 15; i++){
+    for(var ii = 0; ii < 5; ii++){
+      totalCookies = totalCookies += stores[ii].cookiesPerHour[i];
+    }
+    var totalDataEl = document.createElement('td');
+    totalDataEl.textContent = totalCookies;
+    totalRowEl.appendChild(totalDataEl);
+    var totalCookies = 0;
+  }
+}
+
+makeTotalRow();
