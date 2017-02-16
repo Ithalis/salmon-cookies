@@ -1,7 +1,7 @@
 'use strict';
 
 //An array for use when creating the sales projections per hour
-var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 function CookieStore(name, minCustomers, maxCustomers, avgCookies){
   this.name = name;
