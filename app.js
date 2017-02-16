@@ -3,88 +3,114 @@
 //An array for use when creating the sales projections per hour
 var storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-//This is where all of the stores are stored as objects
-var firstAndPike = {
-  name: 'firstAndPike',
-  minCustomers:23,
-  maxCustomers:65,
-  avgCookies:6.3,
-  randomCustomers: function(){
-    return Math.floor(Math.random() * (65 - 23)) + 23;
-  },
-  cookiesPerHour: []
-};
-var seatacAirport = {
-  name: 'seatacAirport',
-  minCustomers:3,
-  maxCustomers:24,
-  avgCookies:1.2,
-  randomCustomers: function(){
-    return Math.floor(Math.random() * (24 - 3)) + 3;
-  },
-  cookiesPerHour: []
-};
-var seattleCenter = {
-  name: 'seattleCenter',
-  minCustomers:11,
-  maxCustomers:38,
-  avgCookies:3.7,
-  randomCustomers: function(){
-    return Math.floor(Math.random() * (38 - 11)) + 11;
-  },
-  cookiesPerHour: []
-};
-var capitolHill = {
-  name: 'capitolHill',
-  minCustomers:20,
-  maxCustomers:38,
-  avgCookies:2.3,
-  randomCustomers: function(){
-    return Math.floor(Math.random() * (38 - 20)) + 20;
-  },
-  cookiesPerHour: []
-};
-var alki = {
-  name: 'alki',
-  minCustomers:2,
-  maxCustomers:16,
-  avgCookies:4.6,
-  randomCustomers: function(){
-    return Math.floor(Math.random() * (16 - 2)) + 2;
-  },
-  cookiesPerHour: []
+function CookieStore(name, minCustomers, maxCustomers, avgCookies){
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookies = avgCookies;
+  this.cookiesPerHour = [];
+  this.range = maxCustomers - minCustomers;
+}
+
+var firstAndPike = new CookieStore('First and Pike', 23, 65, 6.3);
+var seatacAirport = new CookieStore('Seatac Airport', 3, 24, 1.2);
+var seattleCenter = new CookieStore('Seattle Center', 11, 38, 3.7);
+var capitolHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
+var alki = new CookieStore('Alki', 2, 16, 4.6);
+
+CookieStore.prototype.randomCustomers = function(){
+  return Math.floor(Math.random() * (this.range + 1) + this.minCustomers);
 };
 
 //This is a function that can be called for each store/object.
 var getCookiesPerHour = function(objectName){
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < storeHours.length; i++){
     objectName.cookiesPerHour.push(Math.floor(objectName.randomCustomers() * objectName.avgCookies));
   }
 };
 
-//Call a function for each city to populate the arrays in each object.
-getCookiesPerHour(firstAndPike);
-getCookiesPerHour(seatacAirport);
-getCookiesPerHour(seattleCenter);
-getCookiesPerHour(capitolHill);
-getCookiesPerHour(alki);
+CookieStore.prototype.makeTheTable = function(tableToDrawInto){
+  var hourlySalesRowEl = document.createElement('tr');
+  console.log(hourlySalesRowEl);
+  var storeNameEl = document.createElement('th');
+  console.log(storeNameEl);
+  storeNameEl.textContent = this.name;
+  hourlySalesRowEl.appendChild(storeNameEl);
 
-//Create function to create an ul and insert the array into it.
-function putSalesProjections(location){
-  console.log(location.name + '-projections');
-  var ulElement = document.getElementById(location.name + '-projections');
+  for(var hours = 0; hours < this.cookiesPerHour.length; hours++){
+    var hourlyCookieSales = document.createElement('td');
+    console.log(hourlyCookieSales);
+    hourlyCookieSales.textContent = this.cookiesPerHour[hours];
+    console.log(hourlyCookieSales);
+    hourlySalesRowEl.appendChild(hourlyCookieSales);
+  }
+  tableToDrawInto.appendChild(hourlySalesRowEl);
+};
 
-  for(var ii = 0; ii < 15; ii++){
-    var liElement = document.createElement('li');
-    liElement.setAttribute('class', 'avgCookiesPerHour');
-    liElement.innerHTML = storeHours[ii] + ': ' + location.cookiesPerHour[ii] + ' cookies';
-    ulElement.appendChild(liElement);
+var tableEl = document.createElement('table');
+console.log(tableEl);
+var sectionEl = document.getElementById('cookieSalesTable');
+sectionEl.appendChild(tableEl);
+
+var hoursRowEl = document.createElement('tr');
+var hoursHeaderEl = document.createElement('th');
+hoursRowEl.appendChild(hoursHeaderEl);
+for(var tableHours = 0; tableHours < storeHours.length; tableHours++){
+  var hoursDataEl = document.createElement('td');
+  hoursDataEl.textContent = storeHours[tableHours];
+  hoursRowEl.appendChild(hoursDataEl);
+}
+tableEl.appendChild(hoursRowEl);
+
+var stores = [firstAndPike, seatacAirport, seattleCenter, capitolHill, alki];
+
+console.log('==============EVENT LISTENERS===============');
+
+var newUserStores = [];
+var storeFormEl = document.getElementById('new-store-form');
+
+storeFormEl.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event){
+  event.preventDefault();
+  event.stopPropagation();
+
+  var name = event.target.newStoreName.value;
+  var minCustomers = event.target.minCustomers.value;
+  var maxCustomers = event.target.maxCustomers.value;
+  var avgCookies = event.target.avgCookies.value;
+
+  console.log(name);
+  console.log(minCustomers);
+  console.log(maxCustomers);
+  console.log(avgCookies);
+
+  var newStore = new CookieStore(name, minCustomers, maxCustomers, avgCookies);
+  stores.push(newStore);
+  getCookiesPerHour(newStore);
+}
+
+for(var storeNumber = 0; storeNumber < stores.length; storeNumber++){
+  getCookiesPerHour(stores[storeNumber]);
+  stores[storeNumber].makeTheTable(tableEl);
+}
+
+function makeTotalRow(){
+  var totalRowEl = document.createElement('tr');
+  tableEl.appendChild(totalRowEl);
+  var totalHeaderEl = document.createElement('th');
+  totalHeaderEl.textContent = 'Totals';
+  totalRowEl.appendChild(totalHeaderEl);
+  var totalCookies = 0;
+  for(var i = 0; i < storeHours.length; i++){
+    for(var ii = 0; ii < stores.length; ii++){
+      totalCookies = totalCookies += stores[ii].cookiesPerHour[i];
+    }
+    var totalDataEl = document.createElement('td');
+    totalDataEl.textContent = totalCookies;
+    totalRowEl.appendChild(totalDataEl);
+    var totalCookies = 0;
   }
 }
 
-//call the functions to make the lists
-putSalesProjections(firstAndPike);
-putSalesProjections(seatacAirport);
-putSalesProjections(seattleCenter);
-putSalesProjections(capitolHill);
-putSalesProjections(alki);
+makeTotalRow();
