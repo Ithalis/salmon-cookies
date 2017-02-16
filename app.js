@@ -24,7 +24,7 @@ CookieStore.prototype.randomCustomers = function(){
 
 //This is a function that can be called for each store/object.
 var getCookiesPerHour = function(objectName){
-  for(var i = 0; i < 15; i++){
+  for(var i = 0; i < storeHours.length; i++){
     objectName.cookiesPerHour.push(Math.floor(objectName.randomCustomers() * objectName.avgCookies));
   }
 };
@@ -47,13 +47,6 @@ CookieStore.prototype.makeTheTable = function(tableToDrawInto){
   tableToDrawInto.appendChild(hourlySalesRowEl);
 };
 
-//Call a function for each city to populate the arrays in each object.
-getCookiesPerHour(firstAndPike);
-getCookiesPerHour(seatacAirport);
-getCookiesPerHour(seattleCenter);
-getCookiesPerHour(capitolHill);
-getCookiesPerHour(alki);
-
 var tableEl = document.createElement('table');
 console.log(tableEl);
 var sectionEl = document.getElementById('cookieSalesTable');
@@ -69,13 +62,39 @@ for(var tableHours = 0; tableHours < storeHours.length; tableHours++){
 }
 tableEl.appendChild(hoursRowEl);
 
-firstAndPike.makeTheTable(tableEl);
-seatacAirport.makeTheTable(tableEl);
-seattleCenter.makeTheTable(tableEl);
-capitolHill.makeTheTable(tableEl);
-alki.makeTheTable(tableEl);
-
 var stores = [firstAndPike, seatacAirport, seattleCenter, capitolHill, alki];
+
+console.log('==============EVENT LISTENERS===============');
+
+var newUserStores = [];
+var storeFormEl = document.getElementById('new-store-form');
+
+storeFormEl.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event){
+  event.preventDefault();
+  event.stopPropagation();
+
+  var name = event.target.newStoreName.value;
+  var minCustomers = event.target.minCustomers.value;
+  var maxCustomers = event.target.maxCustomers.value;
+  var avgCookies = event.target.avgCookies.value;
+
+  console.log(name);
+  console.log(minCustomers);
+  console.log(maxCustomers);
+  console.log(avgCookies);
+
+  var newStore = new CookieStore(name, minCustomers, maxCustomers, avgCookies);
+  stores.push(newStore);
+  getCookiesPerHour(newStore);
+}
+
+for(var storeNumber = 0; storeNumber < stores.length; storeNumber++){
+  getCookiesPerHour(stores[storeNumber]);
+  stores[storeNumber].makeTheTable(tableEl);
+}
+
 function makeTotalRow(){
   var totalRowEl = document.createElement('tr');
   tableEl.appendChild(totalRowEl);
@@ -83,8 +102,8 @@ function makeTotalRow(){
   totalHeaderEl.textContent = 'Totals';
   totalRowEl.appendChild(totalHeaderEl);
   var totalCookies = 0;
-  for(var i = 0; i < 15; i++){
-    for(var ii = 0; ii < 5; ii++){
+  for(var i = 0; i < storeHours.length; i++){
+    for(var ii = 0; ii < stores.length; ii++){
       totalCookies = totalCookies += stores[ii].cookiesPerHour[i];
     }
     var totalDataEl = document.createElement('td');

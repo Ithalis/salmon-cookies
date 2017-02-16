@@ -26,6 +26,26 @@
       <li>Capitol Hill</li>
       <li>Alki</li>
     </ul>
+    <div class="form">
+      <form id="new-store-form">
+        <fieldset>
+          <legend>Enter New Cookie Store Info</legend>
+            <label for="newStoreName">Cookie Store Name:</label>
+            <input type="text" name="newStoreName">
+            <label for="minCustomers">Minimum Customers/Hour</label>
+            <input type="number" min="0" name="minCustomers">
+            <label for="maxCustomers">Maximum Customers/Hour</label>
+            <input type="text" min="0" name="maxCustomers">
+            <label for="avgCookies">Average Cookies/Customer</label>
+            <input type="text" min="0" step="any" name="avgCookies" value="">
+            <button type="submit" name="submitStoreInfo">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <section id="cookieSalesTable">
+
+    </section>
     <p id="inspiration">Remember! Life might get hard, but always swim upstream! Get it? Cause we serve salmon!</p>
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
