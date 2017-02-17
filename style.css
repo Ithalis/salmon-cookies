@@ -75,13 +75,13 @@ label, input{
   display: block;
 }
 
-#new-store-form{
+.new-store-form{
   width: 37%;
   margin-left: auto;
   margin-right: auto;
 }
 
-#cookieSalesTable{
+.cookieSalesTable{
   margin-top: 50px;
   margin-left: 25%;
   margin-right: auto;
