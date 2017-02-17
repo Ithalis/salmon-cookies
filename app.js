@@ -88,6 +88,9 @@ function handleSubmit(event){
   var newStore = new CookieStore(name, minCustomers, maxCustomers, avgCookies);
   stores.push(newStore);
   getCookiesPerHour(newStore);
+  tableEl.deleteRow(-1);
+  newStore.makeTheTable(tableEl);
+  makeTotalRow();
 }
 
 for(var storeNumber = 0; storeNumber < stores.length; storeNumber++){
