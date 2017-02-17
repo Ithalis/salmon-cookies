@@ -38,7 +38,9 @@ h1 {
 }
 
 .main-lists{
-  display: inline;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .stores div{
@@ -74,11 +76,13 @@ label, input{
 }
 
 #new-store-form{
-  width: 50%;
+  width: 37%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.cookieSalesTable{
+#cookieSalesTable{
   margin-top: 50px;
+  margin-left: 25%;
+  margin-right: auto;
 }
