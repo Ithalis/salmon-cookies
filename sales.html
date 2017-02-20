@@ -6,7 +6,23 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <section id="cookieSalesTable">
+    <div>
+      <form class="new-store-form">
+        <fieldset>
+          <legend>Enter New Cookie Store Info</legend>
+            <label for="newStoreName">Cookie Store Name:</label>
+            <input type="text" name="newStoreName">
+            <label for="minCustomers">Minimum Customers/Hour</label>
+            <input type="number" min="minCustomers" name="minCustomers">
+            <label for="maxCustomers">Maximum Customers/Hour</label>
+            <input type="text" min="0" name="maxCustomers">
+            <label for="avgCookies">Average Cookies/Customer</label>
+            <input type="text" min="0" step="any" name="avgCookies" value="">
+            <button type="submit" name="submitStoreInfo">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <section class="cookieSalesTable">
 
     </section>
     <script type="text/javascript" src="app.js"></script>

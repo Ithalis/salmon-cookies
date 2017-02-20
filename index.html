@@ -5,47 +5,89 @@
     <title></title>
     <link rel="stylesheet" href="style.css">
     <header>
-      <h1>Welcome to Salmon Cookies!</h1>
+      <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="index.html">About Us</a>
+        <a href="index.html">Merchandise</a>
+        <a href="index.html">Salmon Info</a>
+      </nav>
     </header>
-    <img src="https://raw.githubusercontent.com/codefellows/seattle-201d19/master/class-06-dom-objects-domain_modeling/assets/salmon.png" />
+    <section class="welcome">
+      <h1>Welcome to Salmon Cookies!</h1>
+      <img src="https://raw.githubusercontent.com/codefellows/seattle-201d19/master/class-06-dom-objects-domain_modeling/assets/salmon.png" />
+      <p>Welcome to the greatest invention since sliced bread! Here at Salmon Cookies, we offer only the best cookies made of salmon! They're in the shape of salmon, they have the fun of salmon, they just don't taste like salmon! Thanks to being ground up super fine, you can't taste the salmon. It's the best pairing for coffee on an overcast day in Seattle!</p>
+    </section>
   </head>
   <body>
-    <p id="main-text">Welcome to the greatest invention since sliced bread! Here at Salmon Cookies, we offer only the best cookies made of salmon! They're in the shape of salmon, they have the fun of salmon, they just don't taste like salmon! Thanks to being ground up super fine, you can't taste the salmon. It's the best pairing for coffee on an overcast day in Seattle!</p>
-    <h3>We serve:</h3>
-    <ul>
-      <li>Coffee!</li>
-      <li>Salmon Cookies!</li>
-      <li>Inspiration!</li>
-      <li>Happiness in baked bread form!</li>
-    </ul>
-    <h3>We are located at:</h3>
-    <ul>
-      <li>1st and Pike</li>
-      <li>Seatac Airport</li>
-      <li>Seattle Center</li>
-      <li>Capitol Hill</li>
-      <li>Alki</li>
-    </ul>
-    <div class="form">
-      <form id="new-store-form">
-        <fieldset>
-          <legend>Enter New Cookie Store Info</legend>
-            <label for="newStoreName">Cookie Store Name:</label>
-            <input type="text" name="newStoreName">
-            <label for="minCustomers">Minimum Customers/Hour</label>
-            <input type="number" min="0" name="minCustomers">
-            <label for="maxCustomers">Maximum Customers/Hour</label>
-            <input type="text" min="0" name="maxCustomers">
-            <label for="avgCookies">Average Cookies/Customer</label>
-            <input type="text" min="0" step="any" name="avgCookies" value="">
-            <button type="submit" name="submitStoreInfo">Submit</button>
-        </fieldset>
-      </form>
-    </div>
-    <section id="cookieSalesTable">
-
+    <section class="main-content">
+      <div class="main-text">
+        <h3>We serve:</h3>
+        <div class="main-lists">
+          <ul>
+            <li>Coffee!</li>
+            <li>Salmon Cookies!</li>
+            <li>Inspiration!</li>
+            <li>Happiness in baked bread form!</li>
+          </ul>
+        </div>
+        <h3>We are located at:</h3>
+        <div class="main-lists">
+          <ul>
+            <li>1st and Pike</li>
+            <li>Seatac Airport</li>
+            <li>Seattle Center</li>
+            <li>Capitol Hill</li>
+            <li>Alki</li>
+          </ul>
+        </div>
+      </div>
+      <section class="stores">
+        <div class="first-and-pike">
+          <ul>
+            <li>Located at 102 Pike St, Seattle, WA 98101</li>
+            <li>Hours: 6am-7pm</li>
+            <li>Phone: (555)-555-5556</li>
+            <li>Email: 1stPike@salmoncookies.com</li>
+          </ul>
+        </div>
+        <div class="seatac-airport">
+          <ul>
+            <li>Located at 102 Pike St, Seattle, WA 98101</li>
+            <li>Hours: 6am-7pm</li>
+            <li>Phone: (555)-555-5557</li>
+            <li>Email: Seatac@salmoncookies.com</li>
+          </ul>
+        </div>
+        <div class="seattle-center">
+          <ul>
+            <li>Located at 102 Pike St, Seattle, WA 98101</li>
+            <li>Hours: 6am-7pm</li>
+            <li>Phone: (555)-555-5558</li>
+            <li>Email: SeaCenter@salmoncookies.com</li>
+          </ul>
+        </div>
+        <div class="capitol-hill">
+          <ul>
+            <li>Located at 102 Pike St, Seattle, WA 98101</li>
+            <li>Hours: 6am-7pm</li>
+            <li>Phone: (555)-555-5559</li>
+            <li>Email: CapitolHill@salmoncookies.com</li>
+          </ul>
+        </div>
+        <div class="alki">
+          <ul>
+            <li>Located at 102 Pike St, Seattle, WA 98101</li>
+            <li>Hours: 6am-7pm</li>
+            <li>Phone: (555)-867-5309</li>
+            <li>Email: alki@salmoncookies.com</li>
+          </ul>
+        </div>
+      </section>
     </section>
-    <p id="inspiration">Remember! Life might get hard, but always swim upstream! Get it? Cause we serve salmon!</p>
-    <script type="text/javascript" src="app.js"></script>
+    <footer>
+      <p id="inspiration">
+        Remember! Life might get hard, but always swim upstream! Get it? Cause we serve salmon!
+      </p>
+    </footer>
   </body>
 </html>
